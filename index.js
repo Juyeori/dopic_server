@@ -21,7 +21,10 @@ mongoose.connect('mongodb+srv://juyeon:whoami728@capstone.6igthky.mongodb.net/?r
 
 //회원 가입
 const createUser = async (req, res) => {
+  console.log(req.body);
   const newUser = new User(req.body);
+  console.log("createUser");
+  console.log(newUser);
   try {
     await newUser.save();
     res.status(201).json(newUser);
