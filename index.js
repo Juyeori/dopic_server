@@ -85,50 +85,8 @@ const updateUser = async (req, res) => {
 
 app.put("/users/:id", updateUser);
 
+//로그인 구현해야함
 
 
-// const updatePost = async (req, res) => {
-//   const { id: _id } = req.params;
-//   const post = req.body;
-
-//   if (!mongoose.Types.ObjectId.isValid(_id)) {
-//     res.status(404).send("해당 id는 없습니다!");
-//   } else {
-//     const updatedPost = await PostMessage.findByIdAndUpdate(_id, post, {
-//       new: true,
-//     });
-//     res.json(updatedPost);
-//   }
-// };
-
-// const updateLike = async (req, res) => {
-//   const { id } = req.params;
-
-//   if (!mongoose.Types.ObjectId.isValid(id)) {
-//     res.status(404).send("해당 값이 없습니다.");
-//   } else {
-//     const post = await PostMessage.findById(id);
-//     const updatedPost = await PostMessage.findByIdAndUpdate(
-//       id,
-//       {
-//         likeCount: post.likeCount + 1,
-//       },
-//       { new: true }
-//     );
-
-//     res.json(updatedPost);
-//   }
-// };
-
-
-
-// app.get("/community", getPosts);
-// app.post("/writecontent", createPost);
-
-// app.get("/search", searchPost);
-
-
-// router.patch("/:id", updatePost);
-// router.patch("/:id/like", updateLike);
 
 app.listen(port, () => console.log(`listening on port ${port}!`))
