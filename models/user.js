@@ -15,7 +15,7 @@ function getCurrentDate() {
 const userSchema = mongoose.Schema({
     _id: {type: String, required: true},
     password: {type: String, required: true},
-    email : {type: String, required: true},
+    nickName : {type: String, required: true},
     createdAt:{ // 글을 생성한 날짜 
         type : Date,
         default : getCurrentDate(),
