@@ -5,9 +5,8 @@ const port = 3001
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const {User} = require('./models/user')
+const {Record} = require('./models/record')
 require('dotenv').config()
-
-//const {PostMessage, User} = require("./models/postMessage")
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
@@ -63,5 +62,17 @@ app.post('/login', login);
 
 // 로그아웃
 app.post('/logout', logout);
+
+//두피 기록
+const {
+  createRecord,
+  deleteRecord
+} = require('./record')
+
+//두피 기록 생성
+app.post('/record')
+
+//두피 기록 삭제
+app.delete('/record/:id')
 
 app.listen(port, () => console.log(`listening on port ${port}!`))

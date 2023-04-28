@@ -13,14 +13,15 @@ function getCurrentDate() {
 }
 
 const recordSchema = mongoose.Schema({
-    _id: {type: String, required: true},
-    nickName : {type: String, required: true},
+    id: {type: String, required: true},
     //기록 어떻게 할거?
-    story : {type: String, required: true},
+    result : {type: String, required: true},
+    memo : [{ type: String }],
     createdAt:{ // 글을 생성한 날짜 
         type : Date,
         default : getCurrentDate(),
-    }
+    },
+    _id: {type: String, required: true} //id+createdAt
 }, {timestamps:true})
 
 const Record = mongoose.model('recordList', recordSchema);
