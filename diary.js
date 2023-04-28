@@ -16,7 +16,10 @@ const { Router } = require('express')
 //기록 생성
 const createRecord = async (req, res) => {
     console.log(req.body);
+    
     const newRecord = new Record(req.body);
+    newRecord._id = newRecord.id+"&"+newRecord.createdAt;
+    newRecord._id = newRecord._id.substr(0, newRecord.id.length+16)
     console.log("create record");
     console.log(newRecord);
     try {
@@ -42,7 +45,7 @@ const createRecord = async (req, res) => {
   const deleteRecord = async (req, res) => {
     console.info(req.params.id);
     try {
-      await User.findByIdAndDelete(req.params.id);
+      await Record.findByIdAndDelete(req.params.id);
       res.status(200).json({ message: "Record deleted successfully." });
     } catch (error) {
       res.status(404).json({ message: error.message });

@@ -67,12 +67,12 @@ app.post('/logout', logout);
 const {
   createRecord,
   deleteRecord
-} = require('./record')
+} = require('./diary')
 
 //두피 기록 생성
-app.post('/record')
+app.post('/record', createRecord)
 
 //두피 기록 삭제
-app.delete('/record/:id')
+app.delete('/record/:id', deleteRecord)
 
 app.listen(port, () => console.log(`listening on port ${port}!`))
