@@ -63,17 +63,16 @@ const createUser = async (req, res) => {
   //회원 정보 수정
   const updateUser = async (req, res) => {
     try {
-      const updatedUser = await User.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        { new: true }
-      );
+      const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      if (!updatedUser) {
+        throw new Error('User not found');
+      }
       res.status(200).json(updatedUser);
     } catch (error) {
       res.status(404).json({ message: error.message });
     }
   };
-
+  
   module.exports = {
     createUser,
     getUsers,

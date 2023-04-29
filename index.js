@@ -41,7 +41,7 @@ app.get("/User/:id", getUserById);
 app.delete("/User/:id", deleteUser);
 
 //회원 정보 수정
-app.put("/users/:id", updateUser);
+app.put("/User/:id", updateUser);
 
 //로그인 관련
 const jwt = require('jsonwebtoken');
@@ -66,12 +66,20 @@ app.post('/logout', logout);
 //두피 기록
 const {
   createRecord,
+  getRecordById,
+  getAllRecordById,
+  updateRecord,
   deleteRecord
 } = require('./diary')
 
 //두피 기록 생성
 app.post('/record', createRecord)
-
+//두피 해당 날짜 기록 조회
+app.get('/record/:id', getRecordById)
+//user의 모든 두피 기록 조회
+app.get('/recordAll/:id', getAllRecordById)
+//두피 기록 수정
+app.put('/record/:id',updateRecord)
 //두피 기록 삭제
 app.delete('/record/:id', deleteRecord)
 
