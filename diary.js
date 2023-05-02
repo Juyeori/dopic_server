@@ -40,15 +40,15 @@ const createRecord = async (req, res) => {
   };
   
   //유저 기록 조회
-  //수정 필요함
   const getAllRecordById = async (req, res) => {
     try {
-      const newRecord = await Record.find(req.params.id);
-      res.status(200).json(newRecord);
+      const records = await Record.find({ id: req.params.id });
+      res.status(200).json(records);
     } catch (error) {
       res.status(404).json({ message: error.message });
     }
   };
+
 
   //기록 수정
   const updateRecord = async (req, res) => {
