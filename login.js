@@ -77,6 +77,7 @@ const verifyToken = (token) => {
   try {
     console.log(token);
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY, { algorithms: ['HS256'] });
+    console.log(decoded);
     return decoded;
   } catch (err) {
     if (err instanceof jwt.TokenExpiredError) {

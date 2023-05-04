@@ -14,6 +14,7 @@ app.use(cors());
 app.use(bodyParser.json());
 const mongoose = require('mongoose')
 const { Router } = require('express')
+const {verifyToken} = require('./login')
 
 //회원 가입
 const createUser = async (req, res) => {
@@ -51,6 +52,15 @@ const createUser = async (req, res) => {
   
   //회원 탈퇴
   const deleteUser = async (req, res) => {
+    //토큰 검증
+    const token = req.body.token; // token이 query string으로 전달되는 경우
+    const decoded = verifyToken(token);
+
+    if (!decoded) { // 유효하지 않은 토큰인 경우
+      res.status(401).json({ message: 'Invalid token. You are not authorized to withdraw.' });
+      return;
+    }
+
     console.info(req.params.id);
     try {
       await User.findByIdAndDelete(req.params.id);
@@ -62,6 +72,15 @@ const createUser = async (req, res) => {
   
   //회원 정보 수정
   const updateUser = async (req, res) => {
+    //토큰 검증
+    const token = req.body.token; // token이 query string으로 전달되는 경우
+    const decoded = verifyToken(token);
+
+    if (!decoded) { // 유효하지 않은 토큰인 경우
+      res.status(401).json({ message: 'Invalid token. You are not authorized to modify.' });
+      return;
+    }
+
     try {
       const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
       if (!updatedUser) {
