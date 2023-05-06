@@ -83,4 +83,4 @@ app.put('/record/:id',updateRecord)
 //두피 기록 삭제
 app.delete('/record/:id', deleteRecord)
 
-app.listen(port, () => console.log(`listening on port ${port}!`))
+app.listen(process.env.PORT || 3001);
