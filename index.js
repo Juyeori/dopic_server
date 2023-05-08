@@ -20,6 +20,10 @@ mongoose.connect('mongodb+srv://juyeon:whoami728@capstone.6igthky.mongodb.net/?r
     .catch(err => console.log(err))
 
 
+//server posting page
+app.get('/', (req, res) => {
+  res.send('dopic 서버 주소입니다.');
+});
     
 //회원 관련 모듈
 const {
