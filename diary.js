@@ -43,7 +43,7 @@ const createRecord = async (req, res) => {
   //기록 조회
   const getRecordById = async (req, res) => {
     //토큰 검증
-    const token = req.body.token; // token이 query string으로 전달되는 경우
+    const token = req.query.token; // token이 query string으로 전달되는 경우
     const decoded = verifyToken(token);
 
     if (!decoded) { // 유효하지 않은 토큰인 경우
@@ -61,7 +61,7 @@ const createRecord = async (req, res) => {
   //유저 기록 조회
   const getAllRecordById = async (req, res) => {
     //토큰 검증
-    const token = req.body.token; // token이 query string으로 전달되는 경우
+    const token = req.query.token; // token이 query string으로 전달되는 경우
     const decoded = verifyToken(token);
 
     if (!decoded) { // 유효하지 않은 토큰인 경우
