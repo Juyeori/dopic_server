@@ -14,8 +14,10 @@ function getCurrentDate() {
 
 const recordSchema = mongoose.Schema({
     id: {type: String, required: true},
+    //진단 값
+    result: {type: [Number]},
     //진단 결과
-    result : {type: String, required: true},
+    comment : {type: String},
     //생활 습관 기록
     memo : [{ type: String }],
     createdAt:{ // 글을 생성한 날짜 

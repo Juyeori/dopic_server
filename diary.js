@@ -90,12 +90,12 @@ const createRecord = async (req, res) => {
     }
 
     const { id } = req.params;
-    const { result, memo } = req.body;
+    const { memo } = req.body;
   
     try {
       const updatedRecord = await Record.findByIdAndUpdate(
         id,
-        { result, memo },
+        {  memo },
         { new: true }
       );
   
