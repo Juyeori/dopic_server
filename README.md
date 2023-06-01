@@ -2,7 +2,7 @@
 
 ---
 
-## 💽설치 안내(Installation Process)
+## 💽로컬 설치 안내(Installation Process)
 
 ```bash
 git clone https://github.com/juyeori/dopic_server.git
@@ -19,5 +19,3 @@ npm run dev
 ## 🔨기술 스택 (Technique Used)
 
 node.js + express.js + mongoDB
-
-# test
