@@ -15,6 +15,18 @@ const { Router } = require('express')
 
 const {verifyToken} = require('./login')
 
+
+function getCurrentDate() {
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = date.getMonth();
+  var today = date.getDate();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  return new Date(Date.UTC(year, month, today, hours, minutes, seconds));
+}
+
 //기록 생성
 const createRecord = async (req, res) => {
   //토큰 검증
@@ -26,18 +38,37 @@ const createRecord = async (req, res) => {
     return;
   }
 
-  const newRecord = new Record(req.body);
-  newRecord._id = newRecord.id + "&" + newRecord.createdAt;
-  console.log(newRecord._id);
-  newRecord._id = newRecord._id.substr(0, newRecord.id.length+16);
-  console.log("create record");
-  console.log(newRecord);
+  let now = getCurrentDate();
+  let existingId = req.body.id + "&" + now;
+  existingId = existingId.substr(0, req.body.id.length+16);
+  
+  
   try {
-    await newRecord.save();
-    res.status(201).json(newRecord);
+    let existingRecord = await Record.findById(existingId);
+    if (existingRecord) {
+      existingRecord.memo = req.body.memo;
+      existingRecord.result = req.body.result;
+      existingRecord.comment = req.body.comment;
+
+      const updateRecord = await existingRecord.save();
+      res.status(200).json(updateRecord);
+
+    } else {
+      const newRecord = new Record(req.body);
+      newRecord._id = newRecord.id + "&" + newRecord.createdAt;
+      console.log(newRecord._id);
+      newRecord._id = newRecord._id.substr(0, newRecord.id.length+16);
+      await newRecord.save();
+      res.status(201).json(newRecord);
+      console.log("create record");
+      console.log(newRecord);
+    }
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
+  
+  
+  
 };
     
   //기록 조회
@@ -50,6 +81,7 @@ const createRecord = async (req, res) => {
       res.status(401).json({ message: 'Invalid token. You are not authorized to inquire records.' });
       return;
     }
+
     try {
       const newRecord = await Record.findById(req.params.id);
       res.status(200).json(newRecord);
