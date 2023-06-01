@@ -19,3 +19,7 @@ npm run dev
 ## 🔨기술 스택 (Technique Used)
 
 node.js + express.js + mongoDB
+
+## Deploy Using Heroku
+
+![Heroku](https://img.shields.io/badge/Heroku-430098?style=flat&logo=Heroku&logoColor=white)
